@@ -5,25 +5,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.8'
-    addToPath: true
-- script: |
-    sudo apt-get update
-    sudo apt-get install -y curl
-    curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-    arduino-cli config init
-    arduino-cli config set board_manager.additional_urls https://dl.espressif.com/dl/package_esp32_index.json
-    arduino-cli core update-index
-    arduino-cli core install esp32:esp32
-- task: CmdLine@2
-  inputs:
-    script: |
-      arduino-cli sketch new HelloWorld
-      cd HelloWorld
-      arduino-cli lib install "WiFiNINA"
-      arduino-cli lib install "ArduinoHttpClient"
-      arduino-cli board list
-      arduino-cli compile --fqbn esp32:esp32:esp32 HelloWorld
+- script: mkdir output
+  displayName: 'output folder'
+- script: arduino-builder -hardware "C:\Program Files (x86)\Arduino\hardware" -tools "C:\Program Files (x86)\Arduino\tools-builder" -tools "C:\Program Files (x86)\Arduino\hardware\tools\avr" -built-in-libraries "C:\Program Files (x86)\Arduino\libraries" -fqbn=arduino:mbed:nano33ble -build-path .\output Nanoblemachinedataset\Nanoblemachinedataset.ino
+  displayName: 'arduino-build'
+  
 
