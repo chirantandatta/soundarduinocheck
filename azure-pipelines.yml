@@ -29,4 +29,4 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      arduino-cli upload -p COM5 --fqbn esp32:esp32:esp32 HelloWorld
+       arduino-cli compile --fqbn arduino:mbed:nano33ble Nanoblemachinedataset.ino
