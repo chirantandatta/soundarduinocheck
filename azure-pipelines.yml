@@ -26,7 +26,4 @@ steps:
       arduino-cli lib install "ArduinoHttpClient"
       arduino-cli board list
       arduino-cli compile --fqbn esp32:esp32:esp32 HelloWorld
-- task: CmdLine@2
-  inputs:
-    script: |
-       arduino-cli compile --fqbn arduino:mbed:nano33ble Nanoblemachinedataset.ino
+
