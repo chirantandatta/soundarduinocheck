@@ -1,23 +1,32 @@
-# Starter pipeline
-- task: ArduinoCliBuild@1
-  inputs:
-    fqbn: 'arduino:avr:uno'
-    sketchDir: '$(System.DefaultWorkingDirectory)/Path/To/Sketch'
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.8'
+    addToPath: true
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    sudo apt-get update
+    sudo apt-get install -y curl
+    curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+    arduino-cli config init
+    arduino-cli config set board_manager.additional_urls https://dl.espressif.com/dl/package_esp32_index.json
+    arduino-cli core update-index
+    arduino-cli core install esp32:esp32
+- task: CmdLine@2
+  inputs:
+    script: |
+      arduino-cli sketch new HelloWorld
+      cd HelloWorld
+      arduino-cli lib install "WiFiNINA"
+      arduino-cli lib install "ArduinoHttpClient"
+      arduino-cli board list
+      arduino-cli compile --fqbn esp32:esp32:esp32 HelloWorld
+- task: CmdLine@2
+  inputs:
+    script: |
+      arduino-cli upload -p COM5 --fqbn esp32:esp32:esp32 HelloWorld
