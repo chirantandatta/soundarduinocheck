@@ -12,7 +12,7 @@ steps:
 # Check https://github.com/arduino/arduino-cli/issues if something is not working anymore!
 # So set a specific version! Like: 0.18.0
 
-- script: sudo apt-get update && sudo apt-get install -y arduino
+
 - task: ArduinoCliInstall@1
   inputs:
     version: 'latest'
@@ -41,7 +41,7 @@ steps:
     outputDir: '$(Build.ArtifactStagingDirectory)'
     exportBinaries: true
 
-- script: arduino-cli compile --fqbn arduino:mbed:nano33ble Nanoble_machinedataset.ino
+
 
 
 
