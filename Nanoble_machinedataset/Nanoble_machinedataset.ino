@@ -1,122 +1,36 @@
-/*
- * Voice classifier for Arduino Nano 33 BLE Sense by Alan Wang
- */
+  Blink
 
-#include <math.h>
-#include <PDM.h>
-#include <EloquentTinyML.h>      // https://github.com/eloquentarduino/EloquentTinyML
-#include "tf_lite_model.h"       // TF Lite model file
+  Turns an LED on for one second, then off for one second, repeatedly.
 
+  Most Arduinos have an on-board LED you can control. On the UNO, MEGA and ZERO
+  it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN is set to
+  the correct LED pin independent of which board is used.
+  If you want to know what pin the on-board LED is connected to on your Arduino
+  model, check the Technical Specs of your board at:
+  https://www.arduino.cc/en/Main/Products
 
-#define PDM_SOUND_GAIN     255   // sound gain of PDM mic
-#define PDM_BUFFER_SIZE    256   // buffer size of PDM mic
+  modified 8 May 2014
+  by Scott Fitzgerald
+  modified 2 Sep 2016
+  by Arturo Guadalupi
+  modified 8 Sep 2016
+  by Colby Newman
 
-#define SAMPLE_THRESHOLD   900   // RMS threshold to trigger sampling
-#define FEATURE_SIZE       32    // sampling size of one voice instance
-#define SAMPLE_DELAY       20    // delay time (ms) between sampling
+  This example code is in the public domain.
 
-#define NUMBER_OF_LABELS   3     // number of voice labels
-const String words[NUMBER_OF_LABELS] = {"Yes", "No", "OK"};  // words for each label
+  https://www.arduino.cc/en/Tutorial/BuiltInExamples/Blink
+*/
 
-
-#define PREDIC_THRESHOLD   0.6   // prediction probability threshold for labels
-#define RAW_OUTPUT         true  // output prediction probability of each label
-#define NUMBER_OF_INPUTS   FEATURE_SIZE
-#define NUMBER_OF_OUTPUTS  NUMBER_OF_LABELS
-#define TENSOR_ARENA_SIZE  4 * 1024
-
-
-Eloquent::TinyML::TfLite<NUMBER_OF_INPUTS, NUMBER_OF_OUTPUTS, TENSOR_ARENA_SIZE> tf_model;
-float feature_data[FEATURE_SIZE];
-volatile float rms;
-bool voice_detected;
-
-
-// callback function for PDM mic
-void onPDMdata() {
-
-  rms = -1;
-  short sample_buffer[PDM_BUFFER_SIZE];
-  int bytes_available = PDM.available();
-  PDM.read(sample_buffer, bytes_available);
-
-  // calculate RMS (root mean square) from sample_buffer
-  unsigned int sum = 0;
-  for (unsigned short i = 0; i < (bytes_available / 2); i++) sum += pow(sample_buffer[i], 2);
-  rms = sqrt(float(sum) / (float(bytes_available) / 2.0));
-}
-
+// the setup function runs once when you press reset or power the board
 void setup() {
-
-  Serial.begin(115200);
-  while (!Serial);
-
-  PDM.onReceive(onPDMdata);
-  PDM.setBufferSize(PDM_BUFFER_SIZE);
-  PDM.setGain(PDM_SOUND_GAIN);
-
-  if (!PDM.begin(1, 16000)) {  // start PDM mic and sampling at 16 KHz
-    Serial.println("Failed to start PDM!");
-    while (1);
-  }
-
+  // initialize digital pin LED_BUILTIN as an output.
   pinMode(LED_BUILTIN, OUTPUT);
-
-  // wait 1 second to avoid initial PDM reading
-  delay(900);
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(100);
-  digitalWrite(LED_BUILTIN, LOW);
-
-  // start TF Lite model
-  tf_model.begin((unsigned char*) model_data);
-  
-  Serial.println("=== Classifier start ===\n");
 }
 
+// the loop function runs over and over again forever
 void loop() {
-
-  // waiting until sampling triggered
-  while (rms < SAMPLE_THRESHOLD);
-
-  digitalWrite(LED_BUILTIN, HIGH);
-  for (int i = 0; i < FEATURE_SIZE; i++) {  // sampling
-    while (rms < 0);
-    feature_data[i] = rms;
-    delay(SAMPLE_DELAY);
-  }
-  digitalWrite(LED_BUILTIN, LOW);
-
-  // predict voice and put results (probability) for each label in the array
-  float prediction[NUMBER_OF_LABELS];
-  tf_model.predict(feature_data, prediction);
-
-  // print out prediction results;
-  // in theory, you need to find the highest probability in the array,
-  // but only one of them would be high enough over 0.5~0.6
-  Serial.println("Predicting the word:");
-  if (RAW_OUTPUT) {
-    for (int i = 0; i < NUMBER_OF_LABELS; i++) {
-      Serial.print("Label ");
-      Serial.print(i);
-      Serial.print(" = ");
-      Serial.println(prediction[i]);
-    }
-  }
-  voice_detected = false;
-  for (int i = 0; i < NUMBER_OF_LABELS; i++) {
-    if (prediction[i] >= PREDIC_THRESHOLD) {
-      Serial.print("Word detected: ");
-      Serial.println(words[i]);
-      Serial.println("");
-      voice_detected = true;
-    }
-  }
-  if (!voice_detected && !RAW_OUTPUT) Serial.println("Word not recognized\n");
-
-  // wait for 1 second after one sampling/prediction
-  delay(900);
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(100);
-  digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(LED_BUILTIN, HIGH);  // turn the LED on (HIGH is the voltage level)
+  delay(1000);                      // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
+  delay(1000);                      // wait for a second
 }
