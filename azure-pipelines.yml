@@ -1,13 +1,14 @@
 trigger:
-- main
+- master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: ubuntu-latest
 
 steps:
-- script: mkdir output
-  displayName: 'output folder'
-- script: arduino-builder -hardware "C:\Program Files (x86)\Arduino\hardware" -tools "C:\Program Files (x86)\Arduino\tools-builder" -tools "C:\Program Files (x86)\Arduino\hardware\tools\avr" -built-in-libraries "C:\Program Files (x86)\Arduino\libraries" -fqbn=arduino:mbed:nano33ble -build-path .\output Nanoblemachinedataset\Nanoblemachinedataset.ino
-  displayName: 'arduino-build'
-  
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    arduino-cli compile --fqbn arduino:mbed:nano33ble Nanoble_machinedataset.ino
+  displayName: 'Run a multi-line script'
 
