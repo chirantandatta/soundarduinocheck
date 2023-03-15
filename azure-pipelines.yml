@@ -1,4 +1,5 @@
 trigger:
+
   - main
   
 pool:
@@ -22,10 +23,15 @@ steps:
 - task: ArduinoCliCoreInstall@1
   inputs:
     core: 'arduino:mbed'
-
+- task: ArduinoCliLibInstall@1
+  inputs:
+    installLibBy: 'libName'
+    lib: 'EloquentTinyML@0.0.5'
+    
 # Build Main/Main.ino for fqbn 'arduino:avr:uno'
 # Like every arduino project, the sketch file must be in a directory named the same as the sketch... ¯\_(ツ)_/¯
 # Since arudino cli version 0.10.0 you can't specify a custom path to a sketch file, like 'somedir/someskecht.ino'!
+
 - task: ArduinoCliBuild@1
   inputs:
     fqbn: 'arduino:mbed:nano33ble'
