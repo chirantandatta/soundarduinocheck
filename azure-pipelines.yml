@@ -11,9 +11,7 @@ steps:
 # arduino-cli has often breaking changes!
 # Check https://github.com/arduino/arduino-cli/issues if something is not working anymore!
 # So set a specific version! Like: 0.18.0
-- task: ArduinoCliInstall@1
-  inputs:
-    version: 'latest'
+
 
 # "The first thing to do upon a fresh install is to update the local cache of available platforms and libraries by running"
 # see "Getting started" https://arduino.github.io/arduino-cli/getting-started/#connect-the-board-to-your-pc
