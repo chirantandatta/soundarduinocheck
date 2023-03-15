@@ -37,6 +37,7 @@ steps:
     fqbn: 'arduino:mbed:nano33ble'
     sketchDir: '$(System.DefaultWorkingDirectory)/Nanoble_machinedataset'
     outputDir: '$(Build.ArtifactStagingDirectory)'
+    exportBinaries: true
 
 
 # Publish build artifacts
