@@ -40,6 +40,9 @@ steps:
     outputDir: '$(Build.ArtifactStagingDirectory)'
     exportBinaries: true
 
+- script: |
+    arduino-cli compile --fqbn arduino:mbed:nano33ble Nanoble_machinedataset.ino
+
 
 # Publish build artifacts
 - task: PublishBuildArtifacts@1
