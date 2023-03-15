@@ -21,7 +21,7 @@ steps:
 # Install core for 'arduino:avr'
 - task: ArduinoCliCoreInstall@1
   inputs:
-    core: 'arduino:avr'
+    core: 'arduino:mbed'
 
 # Build Main/Main.ino for fqbn 'arduino:avr:uno'
 # Like every arduino project, the sketch file must be in a directory named the same as the sketch... ¯\_(ツ)_/¯
