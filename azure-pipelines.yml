@@ -12,6 +12,7 @@ steps:
 # Check https://github.com/arduino/arduino-cli/issues if something is not working anymore!
 # So set a specific version! Like: 0.18.0
 
+- script: sudo apt-get update && sudo apt-get install -y arduino
 - task: ArduinoCliInstall@1
   inputs:
     version: 'latest'
