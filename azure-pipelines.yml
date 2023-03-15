@@ -8,7 +8,7 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- script: |
-    arduino-cli compile --fqbn arduino:mbed:nano33ble Nanoble_machinedataset.ino
-  displayName: 'Run a multi-line script'
+- task: CmdLine@2
+  inputs:
+    script: 'arduino-cli compile --fqbn arduino:mbed:nano33ble Nanoble_machinedataset.ino'
 
