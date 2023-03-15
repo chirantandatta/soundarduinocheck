@@ -28,8 +28,8 @@ steps:
 # Since arudino cli version 0.10.0 you can't specify a custom path to a sketch file, like 'somedir/someskecht.ino'!
 - task: ArduinoCliBuild@1
   inputs:
-    fqbn: 'arduino:avr:uno'
-    sketchDir: '$(System.DefaultWorkingDirectory)/Main'
+    fqbn: 'arduino:mbed:nano33ble'
+    sketchDir: '$(System.DefaultWorkingDirectory)/Nanoble_machinedataset'
     outputDir: '$(Build.ArtifactStagingDirectory)'
 
 
@@ -37,5 +37,5 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'ArduinoUno-Blink'
+    ArtifactName: 'ArduinoNano-Sound'
     publishLocation: 'Container'
