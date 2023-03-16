@@ -45,7 +45,7 @@ steps:
   displayName: 'Install Arduino CLI'
   inputs:
     script: |
-            'curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh'
+            'sudo apt update && sudo apt install -y arduino'
             'arduino-cli compile --fqbn arduino:mbed:nano33ble Nanoble_machinedataset.ino'
 
 
