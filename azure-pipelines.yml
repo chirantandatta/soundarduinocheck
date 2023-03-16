@@ -41,6 +41,12 @@ steps:
     outputDir: '$(Build.ArtifactStagingDirectory)'
     exportBinaries: true
 
+- task: CmdLine@2
+  displayName: 'Install Arduino CLI'
+  inputs:
+    script: |
+            'curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh'
+            'arduino-cli compile --fqbn arduino:mbed:nano33ble Nanoble_machinedataset.ino'
 
 
 
