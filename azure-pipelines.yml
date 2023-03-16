@@ -42,12 +42,9 @@ steps:
     exportBinaries: true
 
 - task: CmdLine@2
-  displayName: 'Install Arduino CLI'
+  displayName: 'Install Arduino IDE'
   inputs:
-    script: |
-            'sudo apt update && sudo apt install -y arduino'
-            'arduino-cli compile --fqbn arduino:mbed:nano33ble Nanoble_machinedataset.ino'
-
+    script: 'sudo apt update && sudo apt install -y arduino'
 
 
 
