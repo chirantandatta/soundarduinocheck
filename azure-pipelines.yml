@@ -47,7 +47,7 @@ steps:
     script: 'sudo apt update && sudo apt install -y arduino'
 
 - script: |
-    arduino-cli compile --fqbn arduino:mbed:nano33ble $(System.DefaultWorkingDirectory)/Nanoble_machinedataset
+    arduino-cli compile --fqbn=arduino:mbed:nano33ble $(System.DefaultWorkingDirectory)/Nanoble_machinedataset
   displayName: 'Build and Upload Sketch'
 
 
