@@ -41,7 +41,8 @@ steps:
     outputDir: '$(Build.ArtifactStagingDirectory)'
     exportBinaries: true
 
-
+- script: arduino-cli compile --fqbn=arduino:mbed:nano33ble $(System.DefaultWorkingDirectory)/Nanoble_machinedataset
+  workingDirectory: /opt/hostedtoolcache/arduino-cli/0.31.0/Linux_64bit
 
 
 
