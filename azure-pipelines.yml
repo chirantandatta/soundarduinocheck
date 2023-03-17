@@ -44,7 +44,9 @@ steps:
 - script: |
     curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
     ls bin/
-    arduino-cli version
+    cp arduino-cli /bin/
+    cd ~
+    arduino-cli
   displayName: 'Step 1'
 
 
