@@ -42,10 +42,7 @@ steps:
     exportBinaries: true
 
 - script: |
-    apt update
-    apt install golang
-    go get -u github.com/arduino/arduino-cli
-    cd ~/go
+    curl -fsSL github.com/arduino/arduino-cli
     cd bin
     cp arduino-cli /bin/
     cd ~
