@@ -41,7 +41,12 @@ steps:
     outputDir: '$(Build.ArtifactStagingDirectory)'
     exportBinaries: true
 
-
+- script: |
+    curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+    cd bin
+    cpp arduino-cli /bin/
+    cd ~
+    arduino-cli version
 
 
 
