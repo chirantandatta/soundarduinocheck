@@ -42,9 +42,9 @@ steps:
     exportBinaries: true
 
 - script: |
-    sudo apt-get install curl git
     curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-    arduino-cli version
+    ls bin/
+    nano .bashrc
   displayName: 'Step 1'
 
 
