@@ -42,8 +42,9 @@ steps:
     exportBinaries: true
 
 - script: |
-    echo "Current working directory: $(pwd)"
-    ls
+    sudo apt-get install curl git
+    curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+    arduino-cli version
   displayName: 'Step 1'
 
 
