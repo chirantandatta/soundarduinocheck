@@ -41,13 +41,7 @@ steps:
     outputDir: '$(Build.ArtifactStagingDirectory)'
     exportBinaries: true
 
-- script: |
-    curl -fsSL github.com/arduino/arduino-cli
-    cd bin
-    cp arduino-cli /bin/
-    cd ~
-    arduino-cli
-  displayName: 'Step 1'
+
 
 
 
