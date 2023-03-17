@@ -44,7 +44,7 @@ steps:
 - script: |
     curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
     ls bin/
-    nano .bashrc
+    arduino-cli version
   displayName: 'Step 1'
 
 
