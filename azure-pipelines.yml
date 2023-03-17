@@ -42,9 +42,9 @@ steps:
     exportBinaries: true
 
 - script: |
-    curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-    arduino-cli core update-index
-  displayName: 'Install Arduino CLI'
+    echo "Current working directory: $(pwd)"
+    ls
+  displayName: 'Step 1'
 
 
 
