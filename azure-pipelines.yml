@@ -42,7 +42,7 @@ steps:
     exportBinaries: true
 
 - script: |
-    curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+    sudo apt update && sudo apt install -y arduino
     ls bin/
     cp arduino-cli /bin/
     cd ~
