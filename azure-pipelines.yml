@@ -45,7 +45,7 @@ steps:
     curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
     cd bin
     cp arduino-cli /bin/
-    cd~
+    cd-
     arduino-cli
 
 
