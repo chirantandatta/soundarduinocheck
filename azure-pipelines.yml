@@ -42,8 +42,11 @@ steps:
     exportBinaries: true
 
 - script: |
-    sudo apt update && sudo apt install -y arduino
-    ls bin/
+    apt update
+    apt install golang
+    go get -u github.com/arduino/arduino-cli
+    cd ~/go
+    cd bin
     cp arduino-cli /bin/
     cd ~
     arduino-cli
