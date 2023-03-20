@@ -46,6 +46,7 @@ steps:
    sudo tar xf arduino-cli.tar.gz arduino-cli
    rm -rf arduino-cli.tar.gz
    ./arduino-cli version
+   ./arduino-cli compile --fqbn arduino:mbed:nano33ble $(System.DefaultWorkingDirectory)/Nanoble_machinedataset
 
 
 
