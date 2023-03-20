@@ -43,7 +43,7 @@ steps:
 
 - script: |
    wget -qO arduino-cli.tar.gz https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz
-   sudo tar xf arduino-cli.tar.gz -C /home/vsts/work/1/s/bin arduino-cli
+   sudo tar xf arduino-cli.tar.gz -$(System.DefaultWorkingDirectory)/bin arduino-cli
 
 
 
