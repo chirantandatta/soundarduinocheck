@@ -45,6 +45,7 @@ steps:
    wget -qO arduino-cli.tar.gz https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz
    sudo tar xf arduino-cli.tar.gz arduino-cli
    rm -rf arduino-cli.tar.gz
+   arduino-cli version
 
 
 
