@@ -47,6 +47,8 @@ steps:
    rm -rf arduino-cli.tar.gz
    ./arduino-cli version
    ./arduino-cli compile --fqbn arduino:mbed:nano33ble $(System.DefaultWorkingDirectory)/Nanoble_machinedataset
+   ./arduino-cli upload -p /dev/ttyUSB0 --fqbn arduino:mbed:nano33ble $(System.DefaultWorkingDirectory)/Nanoble_machinedataset
+
 
 
 
